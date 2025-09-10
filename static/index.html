@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>WHYBOT — Explainable Autonomy</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="/static/styles.css"/>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>WHYBOT</h1>
+      <p>Plan a path, see <em>why</em>. Drag sliders and compare counterfactual routes.</p>
+    </header>
+
+    <main>
+      <section class="left">
+        <canvas id="grid" width="640" height="480"></canvas>
+        <div class="legend">
+          <span class="chip chip-empty"></span> empty
+          <span class="chip chip-obs"></span> obstacle
+          <span class="chip chip-haz"></span> hazard memory
+          <span class="chip chip-start"></span> start
+          <span class="chip chip-goal"></span> goal
+          <span class="chip chip-path"></span> path
+          <span class="chip chip-ctrf"></span> counterfactual
+        </div>
+        <div class="hint">
+          Click cells to toggle: empty → obstacle → hazard mem → empty.  
+          Use the buttons to set <strong>Start</strong> and <strong>Goal</strong>.
+        </div>
+      </section>
+
+      <section class="right">
+        <div class="controls">
+          <div class="row">
+            <button id="btnStart">Set Start</button>
+            <button id="btnGoal">Set Goal</button>
+            <button id="btnClear">Clear</button>
+            <button id="btnWalls">Random Walls</button>
+            <button id="btnDemo">Demo Scenario</button>
+          </div>
+          <div class="sliders">
+            <div class="slide">
+              <label>Time <span id="val-time">1.0</span></label>
+              <input id="w-time" type="range" min="0" max="3" step="0.1" value="1">
+            </div>
+            <div class="slide">
+              <label>Risk <span id="val-risk">1.0</span></label>
+              <input id="w-risk" type="range" min="0" max="3" step="0.1" value="1">
+            </div>
+            <div class="slide">
+              <label>Energy <span id="val-energy">0.5</span></label>
+              <input id="w-energy" type="range" min="0" max="3" step="0.1" value="0.5">
+            </div>
+            <div class="slide">
+              <label>Uncertainty <span id="val-unc">0.3</span></label>
+              <input id="w-unc" type="range" min="0" max="3" step="0.1" value="0.3">
+            </div>
+            <div class="slide">
+              <label>Memory <span id="val-mem">1.0</span></label>
+              <input id="w-mem" type="range" min="0" max="3" step="0.1" value="1">
+            </div>
+          </div>
+          <div class="row">
+            <button id="btnPlan" class="primary">Plan</button>
+            <button id="btnStore">Store as Baseline</button>
+            <button id="btnCounter">Counterfactual</button>
+          </div>
+        </div>
+
+        <div class="explain">
+          <h3>Why this route?</h3>
+          <div id="explain-text">—</div>
+          <div class="bars" id="bars"></div>
+          <div id="metrics">—</div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      Built for storytelling: explainable autonomy with counterfactuals.
+    </footer>
+  </div>
+  <script src="/static/script.js"></script>
+</body>
+</html>
